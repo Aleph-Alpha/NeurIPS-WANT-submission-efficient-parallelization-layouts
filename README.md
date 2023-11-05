@@ -1,0 +1,1 @@
+### Excel sheets and scripts for creating plots for NeurIPS [WANT](https://want-ai-hpc.github.io/neurips2023/callforpapers) workshop submission: ["Efficient Parallelization Layouts for Large-Scale Distributed Model Training"](https://openreview.net/pdf?id=Y0AHNkVDeu)
