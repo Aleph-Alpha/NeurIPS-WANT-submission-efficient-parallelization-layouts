@@ -3,7 +3,6 @@ Created with the friendly help of ChatGPT, after a lot of unfriendly coercion :)
 """
 
 import os
-from textwrap import fill
 
 import matplotlib.pyplot as plt
 import pandas as pd
@@ -114,36 +113,35 @@ for file_path in file_paths:
     b2 = plt.bar(
         x_counter + bar_width,
         best_entry_disabled_no_rms["Average MFU"],
-        # color=colors["Disabled"],
-        hatch="xxx",
-        fill=False,
+        color=colors["Disabled"],
+        # hatch="xxx",
+        # fill=False,
         width=bar_width,
     )
     b3 = plt.bar(
         x_counter + 2 * bar_width,
         best_entry_every_layer["Average MFU"],
-        # color=colors["Enabled"],
+        color=colors["Enabled"],
         # hatch="///",
-        fill=False,
+        # fill=False,
         width=bar_width,
     )
     # b1 = b1.patches[0]
     b2 = b2.patches[0]
     b3 = b3.patches[0]
     # Add annotations (triples) above each bar with snake_case labels
-    ANNO_SIZE = 6
-
+    ANNO_SIZE = 8
     # We know this failed, so let's hardcode it
     if file_name == "llama_30B_8k_seq_length_bfloat16_128_GPUs_all_runs":
         plt.text(
             b2.get_x() + b2.get_width() / 2,
-            0.18,  # Adjust the vertical position as needed
+            0.2,  # Adjust the vertical position as needed
             "CUDA Out of Memory",
             rotation="vertical",
             ha="center",
             va="center",
-            fontsize=8,
-            color="black",
+            fontsize=10,
+            color="red",
         )
     plt.annotate(
         f"({best_entry_disabled_no_rms['micro_batch_size'].values[0]}, {best_entry_disabled_no_rms['model_parallel_size'].values[0]}, {best_entry_disabled_no_rms['pipe_parallel_size'].values[0]})",
@@ -179,6 +177,7 @@ ax.legend(
     frameon=False,
     fancybox=True,
     shadow=True,
+    fontsize=8,
 )
 # Set labels and title
 

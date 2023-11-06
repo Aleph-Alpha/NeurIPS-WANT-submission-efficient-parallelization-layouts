@@ -65,7 +65,7 @@ legend_entries = [
 x_counter = 0
 
 # Width of each bar group
-bar_width = 1.2
+bar_width = 1.42
 
 # Create a list to store x-axis positions
 x_positions = []
@@ -138,7 +138,7 @@ for file_path in file_paths:
                 ha="center",
                 xytext=(0, 4),  # 3 points vertical offset
                 textcoords="offset points",
-                fontsize=6,
+                fontsize=8,
             )
             bar_counter += 1
 
@@ -163,6 +163,7 @@ ax.legend(
     frameon=False,
     fancybox=True,
     shadow=True,
+    fontsize=8,
 )
 # Set labels and title
 

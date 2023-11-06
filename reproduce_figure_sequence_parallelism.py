@@ -115,7 +115,7 @@ for file_path in file_paths:
     b1 = b1.patches[0]
     b2 = b2.patches[0]
     # Add annotations (triples) above each bar with snake_case labels
-    ANNO_SIZE = 6
+    ANNO_SIZE = 8
     plt.annotate(
         f"({best_entry_sequence_parallel['micro_batch_size'].values[0]}, {best_entry_sequence_parallel['model_parallel_size'].values[0]}, {best_entry_sequence_parallel['pipe_parallel_size'].values[0]})",
         (b1.get_x() + b1.get_width() / 2, b1.get_height()),
@@ -144,7 +144,7 @@ best_entries.reset_index(drop=True, inplace=True)
 plt.xticks(x_positions, custom_labels, rotation=45, ha="right")
 # plt.legend(legend_entries, loc="upper right", frameon=False, y=1.1)
 ax.legend(legend_entries, loc='upper center', bbox_to_anchor=(0.5, 1.05),
-          ncol=3, frameon=False, fancybox=True, shadow=True)
+          ncol=3, frameon=False, fancybox=True, shadow=True, fontsize=8)
 # Set labels and title
 
 format_axes(ax)

@@ -1,9 +1,6 @@
-import os
-
 import matplotlib.pyplot as plt
-import numpy as np
 import pandas as pd
-from matplotlib.ticker import FixedLocator, FuncFormatter, MultipleLocator  # Import the FuncFormatter
+from matplotlib.ticker import FuncFormatter
 
 from latexify import format_axes, latexify
 
@@ -114,13 +111,19 @@ for file_path, label in file_data:
         else:
             annotation_text = f"({act_type}, {tensor_size:.0f}, {pipe_size:.0f})"
 
+        offset = 0
+        if annotation_text == "(disabled, 2, 1)":
+            print("offsetting")
+            # Hardcode for 13B because of annotation overlap
+            offset = -7
+
         plt.annotate(
             annotation_text,
             (x, y),
             textcoords="offset points",
-            xytext=(45, 2),  # Adjust the vertical position of the annotation
+            xytext=(45, 2 + offset),  # Adjust the vertical position of the annotation
             ha="center",
-            fontsize=8,
+            fontsize=10,
             arrowprops=dict(arrowstyle="-", linestyle="--", color="black", alpha=0.8),
         )
 
@@ -132,14 +135,16 @@ for file_path, label in file_data:
     # ]  # Adjust the tick positions as needed (e.g., for 10^0, 10^1, 10^2, ...)
 
     # plt.xscale("log")
-    ax.set_xscale('log', base=2)
+    ax.set_xscale("log", base=2)
 
     def log_x_axis_formatter(x, pos):
         # Convert the log value 'x' to its corresponding numeric value
         return f"{x:.0f}"
-    def scale_y_axis_labels(value, pos):
-        return f"{value * 100:.0f}"  # Scale the value and format it with one decimal place
 
+    def scale_y_axis_labels(value, pos):
+        return (
+            f"{value * 100:.0f}"  # Scale the value and format it with one decimal place
+        )
 
     # Create a custom y-axis formatter using the scale_y_axis_labels function
     y_formatter = FuncFormatter(scale_y_axis_labels)

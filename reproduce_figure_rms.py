@@ -3,7 +3,6 @@ Created with the friendly help of ChatGPT, after a lot of unfriendly coercion :)
 """
 
 import os
-from operator import eq
 
 import matplotlib.pyplot as plt
 import pandas as pd
