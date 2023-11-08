@@ -2,7 +2,7 @@ from math import sqrt
 import matplotlib
 SPINE_COLOR = 'gray'
 
-def latexify(fig_width=None, fig_height=None, columns=1):
+def latexify(fig_width=None, fig_height=None, columns=1, fontsize=12):
     """Set up matplotlib's RC params for LaTeX plotting.
     Call this before plotting a figure.
 
@@ -34,7 +34,7 @@ def latexify(fig_width=None, fig_height=None, columns=1):
               "so will reduce to" + MAX_HEIGHT_INCHES + "inches.")
         fig_height = MAX_HEIGHT_INCHES
 
-    FONTSIZE=12
+    FONTSIZE=fontsize
     params = {'backend': 'ps',
             #   'text.latex.preamble': ['\\usepackage{gensymb}'],
               'axes.labelsize': FONTSIZE , # fontsize for x and y labels (was 10)

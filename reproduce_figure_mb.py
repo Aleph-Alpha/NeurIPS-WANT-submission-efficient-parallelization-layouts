@@ -4,7 +4,7 @@ from matplotlib.ticker import FuncFormatter
 
 from latexify import format_axes, latexify
 
-latexify()
+latexify(fontsize=16)
 # Define a list of file paths with corresponding labels
 file_data = [
     ("data/llama_13B_bfloat16_64_GPUs_all_runs.xlsx", "13B"),
@@ -76,9 +76,10 @@ for file_path, label in file_data:
     # Sort the best_entries DataFrame by "micro_batch_size"
     best_entries = best_entries.sort_values(by="micro_batch_size")
 
+    bonus_width = 1 if label == "13B" else 0
     # Create a plot for the current file
     fig, ax = plt.subplots(
-        figsize=(4, 3.8)
+        figsize=(4 + bonus_width, 3.8)
     )  # Change the width (12 inches) to your desired size
     format_axes(ax)
     # plt.figure(figsize=(8, 5))  # Adjust the figure size as needed
@@ -110,20 +111,29 @@ for file_path, label in file_data:
             annotation_text = "OOM"
         else:
             annotation_text = f"({act_type}, {tensor_size:.0f}, {pipe_size:.0f})"
+        
+        annotation_text = annotation_text.replace("every_layer", "enabled")
 
-        offset = 0
+        yoffset = 0
         if annotation_text == "(disabled, 2, 1)":
             print("offsetting")
             # Hardcode for 13B because of annotation overlap
-            offset = -7
+            yoffset = -14
+
+        xoffset = 0
+        if annotation_text == "OOM":
+            xoffset = -30
 
         plt.annotate(
             annotation_text,
             (x, y),
             textcoords="offset points",
-            xytext=(45, 2 + offset),  # Adjust the vertical position of the annotation
+            xytext=(
+                60 + xoffset,
+                2 + yoffset,
+            ),  # Adjust the vertical position of the annotation
             ha="center",
-            fontsize=10,
+            fontsize=14,
             arrowprops=dict(arrowstyle="-", linestyle="--", color="black", alpha=0.8),
         )
 
